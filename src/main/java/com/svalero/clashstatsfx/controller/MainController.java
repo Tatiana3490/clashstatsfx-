@@ -14,6 +14,13 @@ import javafx.scene.control.*;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import com.svalero.clashstatsfx.utils.CsvExporter;
+import com.svalero.clashstatsfx.utils.ZipExporter;
+
+
+import java.io.IOException;
+
+
 public class MainController {
 
     @FXML
@@ -86,4 +93,52 @@ public class MainController {
                     error.printStackTrace();
                 });
     }
+
+    @FXML
+    private void onExportCsv() {
+        if (allCards.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aviso");
+            alert.setHeaderText("Sin datos para exportar");
+            alert.setContentText("Primero debes cargar las cartas.");
+            alert.showAndWait();
+            return;
+        }
+
+        try {
+            String csvPath = "cartas.csv";
+            String zipPath = "cartas.zip";
+
+            CsvExporter.exportCardsToCsv(allCards, csvPath);
+
+            ZipExporter.zipFile(csvPath, zipPath).thenRun(() -> {
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Exportación completa");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Se han creado los archivos 'cartas.csv' y 'cartas.zip'.");
+                    alert.showAndWait();
+                });
+            }).exceptionally(e -> {
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Fallo al comprimir");
+                    alert.setContentText(e.getMessage());
+                    alert.showAndWait();
+                });
+                return null;
+            });
+
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Fallo al exportar");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+            e.printStackTrace();
+        }
+    }
+
+
 }

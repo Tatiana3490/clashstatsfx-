@@ -20,6 +20,7 @@
     <HBox spacing="10">
         <TextField fx:id="searchField" promptText="Buscar carta..."/>
         <Button text="Cargar Cartas" onAction="#onLoadCards"/>
+        <Button text="Exportar CSV" onAction="#onExportCsv"/>
     </HBox>
 
     <TableView fx:id="cardsTable" prefHeight="400" prefWidth="600">

@@ -1,0 +1,13 @@
+package com.svalero.clashstatsfx.service;
+
+import com.svalero.clashstatsfx.model.CardResponse;
+import io.reactivex.rxjava3.core.Observable;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+
+public interface ClashRoyaleApi {
+
+    @Headers("Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImVkOTFiODQ0LTkwZDktNGQyZi04ODVmLTE0MGRhZDgxZGJjOSIsImlhdCI6MTc0NjQ3Mjk3Niwic3ViIjoiZGV2ZWxvcGVyLzJmNzExMWYxLWIwNjgtNzA1Ni0xMjU0LTJiYzM3Njg3YjYxMyIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNDguMy4yNy4yNDIiXSwidHlwZSI6ImNsaWVudCJ9XX0.Dyf01foQIc2MXAW-LhuGn4v5ruKK6eVthikSobJDWOXI5gAHw8ILeClGMZVxz5hXgY5BGCecB7w8orYsJJI2Jg")
+    @GET("cards")
+    Observable<CardResponse> getCards();
+}

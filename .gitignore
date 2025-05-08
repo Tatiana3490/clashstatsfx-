@@ -36,3 +36,10 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Archivos generados
+cartas.csv
+cartas.zip
+
+# Configuración sensible
+src/main/resources/config.properties

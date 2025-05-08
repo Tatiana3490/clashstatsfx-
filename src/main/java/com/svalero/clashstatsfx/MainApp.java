@@ -19,9 +19,6 @@ public class MainApp extends Application {
             stage.setTitle("ClashStatsFX - Tu dosis de datos épicos");
             stage.setScene(scene);
 
-            // Opcional: ícono de ventana si tienes uno
-            // stage.getIcons().add(new Image(MainApp.class.getResourceAsStream("images/icon.png")));
-
             stage.show();
         } catch (IOException e) {
             System.err.println("No se pudo cargar la interfaz: " + e.getMessage());

@@ -32,5 +32,21 @@
             <TableColumn fx:id="elixirColumn" text="Elixir" prefWidth="100"/>
         </columns>
     </TableView>
+    <HBox spacing="10">
+        <TextField fx:id="tagField" promptText="Introduce tu Tag (ej: #ABC123)"/>
+        <Button text="Ver Batallas" onAction="#onLoadBattleLog"/>
+    </HBox>
+
+    <TableView fx:id="battleTable" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="battleTimeColumn" text="Fecha"/>
+            <TableColumn fx:id="battleTypeColumn" text="Tipo"/>
+            <TableColumn fx:id="playerNameColumn" text="Jugador"/>
+            <TableColumn fx:id="opponentNameColumn" text="Oponente"/>
+            <TableColumn fx:id="resultColumn" text="Resultado"/>
+        </columns>
+    </TableView>
+
+
 
 </VBox>

@@ -5,14 +5,18 @@ import java.util.concurrent.CompletableFuture;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+/*Clase para comprimir archivos en formato ZIP de manera asíncrona.*/
 public class ZipExporter {
 
-    public static CompletableFuture<Void> zipFile(String sourceFilePath, String zipFilePath) {
+    /*Comprime un archivo en un nuevo archivo ZIP usando CompletableFuture para ejecutar en segundo plano.*/
+
+
+    public static CompletableFuture<Void> zipFile(String sourceFilePath, String zipFilePath) {  //se completa cuando el proceso de compresión termina.
         return CompletableFuture.runAsync(() -> {
             try (
-                    FileOutputStream fos = new FileOutputStream(zipFilePath);
+                    FileOutputStream fos = new FileOutputStream(zipFilePath);   //Ruta de salida del archivo ZIP.
                     ZipOutputStream zos = new ZipOutputStream(fos);
-                    FileInputStream fis = new FileInputStream(sourceFilePath)
+                    FileInputStream fis = new FileInputStream(sourceFilePath)   //Ruta del archivo a comprimir.
             ) {
                 ZipEntry zipEntry = new ZipEntry(new File(sourceFilePath).getName());
                 zos.putNextEntry(zipEntry);

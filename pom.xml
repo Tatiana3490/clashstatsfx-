@@ -38,7 +38,13 @@
             <artifactId>converter-gson</artifactId>
             <version>2.11.0</version>
         </dependency>
-        <!-- Actualización de Gson -->
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>adapter-rxjava3</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
+        <!-- Gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -50,11 +56,6 @@
             <groupId>io.reactivex.rxjava3</groupId>
             <artifactId>rxjava</artifactId>
             <version>3.1.5</version>
-        </dependency>
-        <dependency>
-            <groupId>com.squareup.retrofit2</groupId>
-            <artifactId>adapter-rxjava3</artifactId>
-            <version>2.9.0</version>
         </dependency>
 
         <!-- JUnit -->
@@ -73,6 +74,14 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <!-- Compilador -->
             <plugin>
@@ -81,8 +90,6 @@
                 <version>3.13.0</version>
                 <configuration>
                     <release>20</release>
-                    <!--<source>20</source> -->
-                    <!--<target>20</target> -->
                 </configuration>
             </plugin>
 

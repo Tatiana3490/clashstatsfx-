@@ -2,6 +2,7 @@ package com.svalero.clashstatsfx.model;
 
 import com.google.gson.annotations.SerializedName;
 
+//Incluye nombre, nivel máximo y las URLs de los iconos.
 public class Card {
 
     private String name;

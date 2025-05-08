@@ -9,18 +9,23 @@ import retrofit2.http.Path;
 
 import java.util.List;
 
+
+ /*Interfaz para definir los endpoints de la API de Clash Royale.
+ Retrofit la implementa automáticamente. Traduce los metodos Java en peticiones HTTP y parsea el resultado en objetos.*/
+
 public interface ClashRoyaleApi {
 
+
+     /* Para obtener el historial de batallas de un jugador.*/
     @GET("players/{tag}/battlelog")
     Observable<List<BattleLogEntry>> getBattleLog(
-            @Header("Authorization") String auth,
-            @Path(value = "tag", encoded = false) String tag
-            );
+            @Header("Authorization") String auth,                //Token de autorización Bearer
+            @Path(value = "tag", encoded = false) String tag     //Este es el tag del jugador que incluye "#" y retrofit lo codifica
+    );
 
+    /*ParaObtiene la lista de cartas disponibles.*/
     @GET("cards")
     Observable<CardResponse> getCards(
             @Header("Authorization") String auth
     );
 }
-
-

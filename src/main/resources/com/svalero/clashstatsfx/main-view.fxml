@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
@@ -8,28 +7,44 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.svalero.clashstatsfx.controller.MainController"
       spacing="10"
-      alignment="TOP_CENTER"
-      style="-fx-background-color: #f4f4f4;">
+      alignment="TOP_CENTER">
+
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-
-    <Label text="ClashStatsFX - Visualizador de Cartas" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <Label text="ClashStatsFX - Visualizador de Cartas y Batallas" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
     <HBox spacing="10">
         <TextField fx:id="searchField" promptText="Buscar carta..."/>
         <Button text="Cargar Cartas" onAction="#onLoadCards"/>
-        <Button text="Exportar CSV" onAction="#onExportCsv"/>
+        <Button text="Exportar a CSV+ZIP" onAction="#onExportCsv"/>
     </HBox>
 
-    <TableView fx:id="cardsTable" prefHeight="400" prefWidth="600">
+    <TableView fx:id="cardsTable" prefHeight="300" prefWidth="600">
         <columns>
-            <TableColumn fx:id="imageColumn" text="Imagen" prefWidth="100"/>
             <TableColumn fx:id="nameColumn" text="Nombre" prefWidth="150"/>
-            <TableColumn fx:id="typeColumn" text="Tipo" prefWidth="150"/>
-            <TableColumn fx:id="rarityColumn" text="Rareza" prefWidth="150"/>
+            <TableColumn fx:id="typeColumn" text="Tipo" prefWidth="100"/>
+            <TableColumn fx:id="rarityColumn" text="Rareza" prefWidth="100"/>
             <TableColumn fx:id="elixirColumn" text="Elixir" prefWidth="100"/>
+            <TableColumn fx:id="imageColumn" text="Imagen" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <Separator/>
+
+    <HBox spacing="10">
+        <TextField fx:id="tagField" promptText="Introduce el tag del jugador (ej: #L8999VJC)"/>
+        <Button text="Cargar Batallas" onAction="#onLoadBattleLog"/>
+    </HBox>
+
+    <TableView fx:id="battleTable" prefHeight="200" prefWidth="600">
+        <columns>
+            <TableColumn fx:id="battleTimeColumn" text="Fecha" prefWidth="100"/>
+            <TableColumn fx:id="battleTypeColumn" text="Tipo" prefWidth="100"/>
+            <TableColumn fx:id="playerNameColumn" text="Jugador" prefWidth="150"/>
+            <TableColumn fx:id="opponentNameColumn" text="Oponente" prefWidth="150"/>
+            <TableColumn fx:id="resultColumn" text="Resultado" prefWidth="100"/>
         </columns>
     </TableView>
 

@@ -7,7 +7,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     private static final String BASE_URL = "https://api.clashroyale.com/v1/";
-
     private static ClashRoyaleApi api;
 
     public static ClashRoyaleApi getApi() {

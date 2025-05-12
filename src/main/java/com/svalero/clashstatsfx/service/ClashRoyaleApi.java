@@ -14,7 +14,7 @@ public interface ClashRoyaleApi {
     @GET("players/{tag}/battlelog")
     Observable<List<BattleLogEntry>> getBattleLog(
             @Header("Authorization") String auth,
-            @Path(value = "tag", encoded = false) String tag
+            @Path(value = "tag", encoded = true) String tag
     );
 
     @GET("cards")

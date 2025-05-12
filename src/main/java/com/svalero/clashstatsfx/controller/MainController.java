@@ -48,6 +48,7 @@ public class MainController {
 
     @FXML
     public void initialize() {
+
         // Configuración de columnas de la tabla de cartas
         nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
         rarityColumn.setCellValueFactory(data -> new SimpleStringProperty("N/A"));
@@ -73,11 +74,14 @@ public class MainController {
         playerNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPlayerName()));
         opponentNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getOpponentName()));
         resultColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getResult()));
+
+        testConnection();
+
     }
 
     @FXML
     private void onLoadCards() {
-        String token = TokenManager.getToken();
+        String token = "Bearer " + TokenManager.getToken();
 
         RetrofitClient.getApi()
                 .getCards(token)
@@ -98,7 +102,15 @@ public class MainController {
         }
 
         String encodedTag = rawTag.replace("#", "%23");
-        String token = TokenManager.getToken();
+        String token = "Bearer " + TokenManager.getToken();
+
+       /* System.out.println("=== DEBUG MANUAL ===");
+        System.out.println("Token: " + token);
+        System.out.println("Tag original: " + rawTag);
+        System.out.println("Tag codificado: " + encodedTag);
+        System.out.println("URL final: https://api.clashroyale.com/v1/players/" + encodedTag + "/battlelog");*/
+
+
 
         RetrofitClient.getApi()
                 .getBattleLog(token, encodedTag)
@@ -110,7 +122,14 @@ public class MainController {
                     } else {
                         battleLog.setAll(response);
                     }
-                }), error -> Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Error", "No se pudo cargar el historial: " + error.getMessage())));
+                }), error -> Platform.runLater(() -> {
+                    if (error.getMessage().contains("HTTP 404")) {
+                        showAlert(Alert.AlertType.ERROR, "Jugador no encontrado", "El tag introducido no existe o el jugador no tiene historial visible.");
+                    } else {
+                        showAlert(Alert.AlertType.ERROR, "Error", "No se pudo cargar el historial: " + error.getMessage());
+                    }
+                }));
+
     }
 
     @FXML
@@ -145,4 +164,24 @@ public class MainController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+    private void testConnection() {
+        String token = "Bearer " + TokenManager.getToken();
+        String tag = "%23L8999VJC";
+
+        System.out.println("== TESTEANDO MANUALMENTE ==");
+        System.out.println("Token: " + token);
+        System.out.println("Tag: " + tag);
+        System.out.println("URL: https://api.clashroyale.com/v1/players/" + tag + "/battlelog");
+
+        RetrofitClient.getApi()
+                .getBattleLog(token, tag)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.single())
+                .subscribe(
+                        response -> System.out.println("✅ FUNCIONA. Se recibieron " + response.size() + " batallas."),
+                        error -> System.err.println("❌ ERROR: " + error.getMessage())
+                );
+    }
+
 }

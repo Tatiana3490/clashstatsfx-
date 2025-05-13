@@ -179,8 +179,8 @@ public class MainController {
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.single())
                 .subscribe(
-                        response -> System.out.println("✅ FUNCIONA. Se recibieron " + response.size() + " batallas."),
-                        error -> System.err.println("❌ ERROR: " + error.getMessage())
+                        response -> System.out.println("FUNCIONA. Se recibieron " + response.size() + " batallas."),
+                        error -> System.err.println("ERROR: " + error.getMessage())
                 );
     }
 
